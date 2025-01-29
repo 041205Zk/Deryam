@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Sıla Göktaş: Boy Kısa, Hayaller Uzun! 🌟</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff6b6b;
+            --secondary-color: #4ecdc4;
+            --text-color: #2d3436;
+        }
+
+        /* TEMEL YAPI */
+        body {
+            font-family: 'Comic Neue', cursive;
+            background: linear-gradient(45deg, #ffeaa7, #81ecec);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* HERO BÖLÜMÜ */
+        .hero {
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: 'Rubik Wet Paint', cursive;
+            font-size: 4em;
+            color: var(--primary-color);
+            text-shadow: 3px 3px 0 white;
+            animation: bounce 2s infinite;
+        }
+
+        .hero p {
+            font-size: 2em;
+            color: var(--secondary-color);
+            margin: 20px 0;
+        }
+
+        /* BOY ÖLÇER */
+        .height-meter {
+            width: 300px;
+            height: 300px;
+            background: white;
+            border-radius: 50%;
+            margin: 50px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5em;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .height-meter:hover {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        /* HAYAL PANELİ */
+        .dream-panel {
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dream-panel::before {
+            content: "🚀";
+            font-size: 10em;
+            position: absolute;
+            right: -50px;
+            bottom: -50px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        /* OYUN ALANI */
+        .mini-game {
+            background: var(--secondary-color);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .moon-target {
+            width: 100px;
+            height: 100px;
+            background: url('https://emojicdn.elk.sh/🌕');
+            cursor: pointer;
+            margin: 20px auto;
+            transition: transform 0.2s;
+        }
+
+        /* ANİMASYONLAR */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        /* GİZLİ EASTER EGG */
+        .secret-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            opacity: 0.1;
+            transition: opacity 0.3s;
+        }
+
+        .secret-button:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HERO BÖLÜMÜ -->
+        <section class="hero">
+            <h1>SILA GÖKTAŞ</h1>
+            <p>"Boy 158cm, Hayaller Galaksi Kadar Büyük!" 🌌</p>
+            <div class="height-meter" onclick="celebrate()">
+                158cm
+            </div>
+        </section>
+
+        <!-- HAYAL PANELİ -->
+        <div class="dream-panel">
+            <h2>🚀 Sıla'nın Dev Hayalleri</h2>
+            <ul>
+                <li>📏 Dünya Boy Rekoru Kırmak</li>
+                <li>🌎 Dünyayı Penguenlerle Yönetmek</li>
+                <li>🍌 Muz Şeklinde Bir Ev Yapmak</li>
+            </ul>
+        </div>
+
+        <!-- MİNİ OYUN -->
+        <div class="mini-game">
+            <h2>🌕 Aya Ulaşma Oyunu!</h2>
+            <p>Sıla'nın hayallerini gerçekleştirmek için Ay'a tıkla!</p>
+            <div class="moon-target" onclick="moonClick()"></div>
+            <p id="score">Vuruş: 0</p>
+        </div>
+
+        <!-- GİZLİ BUTON -->
+        <button class="secret-button" onclick="activateRainbow()">🌈</button>
+    </div>
+
+    <script>
+        // KONFETİ FONKSİYONU
+        function celebrate() {
+            for(let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    width: 10px;
+                    height: 10px;
+                    background: hsl(${Math.random()*360}deg, 100%, 50%);
+                    left: ${Math.random()*100}vw;
+                    top: -10px;
+                    animation: fall ${Math.random()*3+2}s linear;
+                    border-radius: 50%;
+                `;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 3000);
+            }
+            new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3').play();
+        }
+
+        // AY OYUNU
+        let score = 0;
+        function moonClick() {
+            score++;
+            document.getElementById('score').textContent = `Vuruş: ${score}`;
+            document.querySelector('.moon-target').style.transform = `scale(${1 + score*0.1})`;
+            if(score === 10) alert('🎉 Sıla Ay\'a Ulaştı!');
+        }
+
+        // GİZLİ RAINBOW MOD
+        function activateRainbow() {
+            document.body.style.animation = 'rainbow 5s infinite';
+            setTimeout(() => {
+                document.body.style.animation = '';
+            }, 5000);
+        }
+
+        // MOUSE İZİ
+        document.addEventListener('mousemove', (e) => {
+            const trail = document.createElement('div');
+            trail.style.cssText = `
+                position: fixed;
+                width: 10px;
+                height: 10px;
+                background: ${Math.random() > 0.5 ? var(--primary-color) : var(--secondary-color)};
+                left: ${e.clientX}px;
+                top: ${e.clientY}px;
+                border-radius: 50%;
+                pointer-events: none;
+                transition: 1s;
+                opacity: 0.7;
+            `;
+            document.body.appendChild(trail);
+            setTimeout(() => trail.remove(), 1000);
+        });
+    </script>
+</body>
+</html>
